@@ -14,6 +14,6 @@ int Apple::add(int num) const {
 void Apple::take(int num) const { cout << "take func " << num << endl; }
 int Apple::getCount() const {
   take(1);
-  //    add(); //error
+  //    add(); //error    const成员函数只能访问const成员函数。
   return apple_number;
 }

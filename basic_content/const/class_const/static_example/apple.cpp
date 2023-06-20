@@ -1,8 +1,8 @@
 #include "apple.h"
 #include <iostream>
 
-const int Apple::apple_number = 10;
-int Apple::ap = 666;
+const int Apple::apple_number = 10;  //static静态成员变量不能在类的内部初始化。在类的内部只是声明，定义必须在类定义体的外部
+int Apple::ap = 666;  //static静态成员变量不能在类的内部初始化。在类的内部只是声明，定义必须在类定义体的外部
 Apple::Apple(int i) {}
 int Apple::add(int num) {
   take(num);

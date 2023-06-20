@@ -10,3 +10,10 @@ int main() {
   b.add(100);
   return 0;
 }
+
+/*
+take func 1
+2
+take func 10
+take func 100
+*/

@@ -2,6 +2,6 @@
 using namespace std;
 int main() {
   const int num = 10;
-  const int *const ptr = &num; // error! const int* -> int*
+  const int *const ptr = &num; // ok
   cout << *ptr << endl;
 }
