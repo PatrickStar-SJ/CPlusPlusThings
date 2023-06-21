@@ -44,11 +44,11 @@ public:
         age=a;
         sex=s;
     }
-    int get_age() const{
+    int get_age() const{   //会被解析成 get_age(const A * const this)
     
         return this->age; 
     }
-    Person& add_age(int a){
+    Person& add_age(int a){   //会被解析成  add_age(A* const this,int a)
         age+=a;
         return *this; 
     }
