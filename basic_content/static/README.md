@@ -270,7 +270,7 @@ g++对于上面两个代码文件是可以正常编译并且打印Hello World!�
 ```cpp
 // source1.cpp
 extern void sayHello();
-static const char* msg = "Hello World!\n";
+static const char* msg = "Hello World!\n"; //因为加上static,就会使得sayHello()变成一个局部函数，而这里我们是需要全局，可以在其他文件访问。
 int main()
 {
     sayHello();
