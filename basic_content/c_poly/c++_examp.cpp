@@ -37,3 +37,10 @@ int main() {
   pa->f(); //调用派生类同名函数
   return 0;
 }
+
+/*
+
+执行结果：
+Base A::f() 
+Derived B::f() 
+*/

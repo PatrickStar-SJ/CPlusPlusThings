@@ -53,3 +53,9 @@ int main()
     pa->_f();
     return 0;
 }
+/*
+
+执行结果：
+Base A::f() 
+Derived B::f() 
+*/
