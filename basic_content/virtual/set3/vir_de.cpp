@@ -19,7 +19,7 @@ using namespace std;
 class base {
 public:
   base() { cout << "Constructing base \n"; }
-  ~base() { cout << "Destructing base \n"; }
+  ~base() { cout << "Destructing base \n"; }   //相比full_virde.cpp 这里的析构函数没有被声明为虚函数
 };
 
 class derived : public base {
@@ -34,3 +34,15 @@ int main(void) {
   delete b;
   return 0;
 }
+
+/*
+为何执行过程没有调用派生类的析构函数？
+因为基类的析构函数没有被声明为虚函数，所以在使用基类指针指向派生类对象时，delete只会调用基类的析构函数。
+因此派生类的析构函数没有被自动调用。
+
+
+执行结果：
+Constructing base 
+Constructing derived 
+Destructing base 
+*/

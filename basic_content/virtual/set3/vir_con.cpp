@@ -31,12 +31,12 @@ class Base {
 public:
   Base() {}
 
-  virtual // Ensures to invoke actual object destructor
+  virtual //  确保调用实际对象的析构函数
       ~Base() {}
 
   virtual void ChangeAttributes() = 0;
 
-  // The "Virtual Constructor"
+  // The "Virtual Constructor"，定义函数，下面有实现
   static Base *Create(int id);
 
   // The "Virtual Copy Constructor"
@@ -88,11 +88,11 @@ public:
   Base *Clone() { return new Derived3(*this); }
 };
 
-// We can also declare "Create" outside Base.
-// But is more relevant to limit it's scope to Base
+// 实现Base类的creat()函数。我们还可以在 Base 外部声明 "Create"
+// 但将其范围限制在 Base 中更为相关
 Base *Base::Create(int id) {
-  // Just expand the if-else ladder, if new Derived class is created
-  // User need not be recompiled to create newly added class objects
+  // 如果创建了新的 Derived 类，只需扩展 if-else 阶梯即可
+  // 用户不需要重新编译就可以创建新添加的类对象
 
   if (id == 1) {
     return new Derived1;
@@ -107,8 +107,8 @@ Base *Base::Create(int id) {
 //// UTILITY SRART
 class User {
 public:
-  User() : pBase(0) {
-    // Creates any object of Base heirarchey at runtime
+  User() : pBase(0) {  //成员初始化列表, 0被赋值给了pBase，即初始化为一个空指针
+    //  在运行时创建 Base 继承结构中的任何对象
 
     int input;
 
@@ -120,7 +120,7 @@ public:
       cin >> input;
     }
 
-    // Create objects via the "Virtual Constructor"
+    // 通过 "虚拟构造函数" 创建对象
     pBase = Base::Create(input);
   }
 
@@ -132,13 +132,13 @@ public:
   }
 
   void Action() {
-    // Duplicate current object
+    // 复制当前对象
     Base *pNewBase = pBase->Clone();
 
     // Change its attributes
     pNewBase->ChangeAttributes();
 
-    // Dispose the created object
+    // 释放创建的对象
     delete pNewBase;
   }
 
@@ -156,3 +156,40 @@ int main() {
 
   delete user;
 }
+
+
+/*
+该程序定义类可一个抽象基类Base，包括一个纯虚函数ChangeAttributes(),它必须在所有派生类中实现。
+同时，还定义了两个函数：`Create()`和`Clone()`。其中，`Create()`函数作为静态函数，实现了 "虚拟构造函数"的功能
+它返回一个指向基类对象的指针。根据不同的 `id` 值，`Create()` 函数可以实例化三个不同的派生类对象。
+`Clone()` 函数作为虚函数，实现了"虚拟复制构造函数"的功能，使用该函数可以创建当前对象的克隆。在所有派生类中都必须实现 `Clone()` 函数。
+
+拷贝构造函数：
+Derived1(const Derived1 &rhs)
+Derived2(const Derived2 &rhs)
+Derived3(const Derived3 &rhs)
+
+代码执行逻辑如下：
+1. 用户类 `User` 创建了一个 `Base` 对象的指针 `pBase`
+2. 调用user类的构造函数，使用初始化列表，将 0赋值给pBase指针(即为空指针)
+3. 通过输入对应的id，对应创建派生类的对象，并将其地址赋值给pBase。（由此，Base类的对象指针pBase指向派生类对象）
+4. 执行Action()函数，创建了一个指针pNewBase,它指向 pBase->Clone();然后调用pNewBase的成员函数ChangeAttributes().再释放pNewBase指向的对象。
+5. 最后调用 User类的析构函数，包括释放Base指向的对象，并将pBase置为0；
+
+
+为何Base类的对象指针pBase可以指向派生类对象？
+因为继承机制，允许派生类继承基类的公有成员，于是基类类型的指针，可以指向派生类类型的对象。
+
+为何删除指针后，要赋值0？
+如果不对其赋值0，会使他成为野指针，即指向一个无效的内存地址。当指针被赋值0之后，表示该指针不指向任何有效内存地址，类似空指针。
+空指针，是指向nullptr（空地址），通常被用作指针未初始化的默认值，或者表示指针不指向有效的内存地址。在实际编程中，使用空指针会更加安全和规范。
+
+
+指向结果：
+Enter ID (1, 2 or 3): 1
+Derived1 created
+Derived1 created by deep copy
+Derived1 Attributes Changed
+~Derived1 destroyed
+~Derived1 destroyed
+*/

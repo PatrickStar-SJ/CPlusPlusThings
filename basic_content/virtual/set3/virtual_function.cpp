@@ -17,7 +17,7 @@ class Derived;
 
 class Base {
 private:
-  virtual void fun() { cout << "Base Fun"; }
+  virtual void fun() { cout << "Base Fun"; }  //虚函数可以被声明为私有类型，但是有需要注意的点
   friend int main();
 };
 
@@ -31,3 +31,13 @@ int main() {
   ptr->fun();
   return 0;
 }
+/*
+
+虚函数可以被私有化，但有一些细节需要注意。
+ * 基类指针指向继承类对象，则调用继承类对象的函数；
+ * int main()必须声明为Base类的友元，否则编译失败。 编译器报错：ptr无法访问私有函数。 
+ * 不过，在基类中把虚函数声明为public，在继承类中声明为private，该问题就不存在了。见virtual_function1.cpp
+
+执行结果：
+Derived Fun
+*/
