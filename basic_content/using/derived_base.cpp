@@ -23,14 +23,15 @@ public:
   virtual ~Base() {}
   void test1() { cout << "Base test1..." << endl; }
 
-private: // 私有
+// private: // 私有
+public: // 公有
   int value;
 };
 
 /**
  * 子类对父类成员的访问权限跟如何继承没有任何关系，
  * “子类可以访问父类的public和protected成员，不可以访问父类的private成员”——这句话对任何一种继承都是成立的。
- *
+ * ==> 如果取消注释26行，注释27行，下面 value访问就会有问题
  */
 class Derived : Base {
 public:

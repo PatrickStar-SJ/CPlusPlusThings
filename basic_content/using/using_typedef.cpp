@@ -21,12 +21,25 @@ int main() {
   V2 vec2(nums2, nums2 + sizeof(nums2) / sizeof(int));
 
   for (auto i : vec1)
-    cout << i << " ";
+    std::cout << i << " ";
   cout << endl;
 
   for (auto i : vec2)
-    cout << i << " ";
+    std::cout << i << " ";
   cout << endl;
 
   return 0;
 }
+
+/*
+编译： g++ using_typedef.cpp --std=c++11
+
+对应typedef A B，使用using B=A可以进行同样的操作。
+
+typedef vector<int> V1; 
+using V2 = vector<int>;
+
+执行结果：
+1 2 3 4 5 6 
+5 7 6 
+*/

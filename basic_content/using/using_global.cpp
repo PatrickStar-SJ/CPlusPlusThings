@@ -7,8 +7,8 @@
  */
 
 #include <iostream>
-#define isNs1 1
-// #define isGlobal 2
+// #define isNs1 1
+#define isGlobal 2
 using namespace std;
 void func() { cout << "::func" << endl; }
 
@@ -33,3 +33,9 @@ int main() {
   ns2::func(); // 会根据当前环境定义宏的不同来调用不同命名空间下的func()函数
   return 0;
 }
+/*
+模式一： 10行不注释，11行注释
+模式二： 10行注释，11行不注释
+模式三： 10行注释，11行注释
+
+*/
