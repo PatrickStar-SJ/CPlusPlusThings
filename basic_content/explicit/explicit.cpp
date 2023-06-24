@@ -8,8 +8,8 @@ struct A {
 };
 
 struct B {
-  explicit B(int) {}
-  explicit operator bool() const { return true; }
+  explicit B(int) {}   //explicit 修饰构造函数
+  explicit operator bool() const { return true; } //explicit 修饰转换函数
 };
 
 void doA(A a) {}
@@ -17,7 +17,7 @@ void doA(A a) {}
 void doB(B b) {}
 
 int main() {
-  A a1(1);     // OK：直接初始化
+  A a1(1);     // OK：直接初始化 ==> 数值1被赋值给了A的构造函数，即A(int)。
   A a2 = 1;    // OK：复制初始化
   A a3{1};     // OK：直接列表初始化
   A a4 = {1};  // OK：复制列表初始化
@@ -49,3 +49,10 @@ int main() {
 
   return 0;
 }
+
+/*
+编译： g++ explicit.cpp --std=c++11
+
+explicit 修饰构造函数时，可以防止"隐式转换"和"复制初始化"( = 赋值 以及 列表初始化都是)
+explicit 修饰转换函数时，可以防止"隐式转换"，但按语境转换除外
+*/
