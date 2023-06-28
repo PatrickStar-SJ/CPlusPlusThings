@@ -49,9 +49,33 @@ int main() {
   cout << c11 << endl;
 
   Color2 c2 = Color2::RED;
-  cout << static_cast<int>(c2) << endl;
+  //枚举类的枚举值是以类型为`Color2`的枚举成员进行存储的，所以需要使用`static_cast<int>`进行类型转换，并将其输出，得到2。
+  //`c2` 是一个 `enum class` 类型的枚举变量，它不能直接输出到 `cout` 流。为了输出 `c2` 的值，需要将其转换为整数类型
+  cout << static_cast<int>(c2) << endl;  
+//   cout << c2 << endl; //error
 
+  //定义字符类型的变量`c3`，并将`Color3::RED`进行类型转换，并将其输出，得到'r'。注意，这里枚举值被存储为字符类型。
+  //`Color3::RED` 是一个 `enum class Color3` 类型的枚举值，它不能直接赋给 `char` 类型的变量。需要进行类型转换
   char c3 = static_cast<char>(Color3::RED);
   cout << c3 << endl;
   return 0;
 }
+
+/*
+首先，在命名空间`Color`中定义了一个枚举`Type`，其中`RED`的值是15，`YELLOW`的值是16，`BLUE`的值是17。注意，这些枚举值是以默认的整数类型进行存储的。
+
+接下来，定义了一个结构体`Color1`，内部也有一个枚举`Type`，但是`RED`的值被重新定义为102，`YELLOW`的值是103，`BLUE`的值是104。同样地，这些枚举值也是以默认的整数类型进行存储的。
+
+然后，定义了一个名为`Color2`的枚举类(enum class)，其中`RED`的值是2，`YELLOW`的值是3，`BLUE`的值是4。
+**不同于前面的两个枚举，枚举类中的枚举值是以类型为`Color2`的枚举成员进行存储的!!!!**
+
+紧接着，使用前向声明声明了一个名为`Color3`的枚举类(enum class)。前向声明只告诉编译器该枚举类型的存在，并不给出具体的定义。在后续代码中，对`Color3`进行了再次定义，其中`RED`的值被定义为字符'r'，`BLUE`的值按照默认递增规则进行存储。
+
+
+执行结果：
+15
+102
+104
+2
+r
+*/
