@@ -11,7 +11,7 @@ using namespace std;
  */
 ///===========================================
 #define exp(s) printf("test s is:%s\n", s)
-#define exp1(s) printf("test s is:%s\n", #s)
+#define exp1(s) printf("test s is:%s\n", #s) //#是“字符串化”的意思，出现在宏定义中的#是把跟在后面的参数转换成一个字符串。
 
 #define exp2(s) #s
 
