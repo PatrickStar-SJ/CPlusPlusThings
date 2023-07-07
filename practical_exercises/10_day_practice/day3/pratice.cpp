@@ -37,7 +37,7 @@ int main(int argc, char const *argv[]) {
   cout << "Enter the radius of the pool: ";
   cin >> radius;
 
-  // 声明 Circle 对象
+  // 声明 Circle 对象，同时赋值初始化
   Circle Pool(radius);
   Circle PoolRim(radius + 3);
   // 计算栅栏造价并输出

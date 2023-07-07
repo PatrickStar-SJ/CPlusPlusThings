@@ -15,7 +15,7 @@ public:
     Y = yy;
     countP++;
   }
-  Point(Point &p);
+  Point(Point &p);  //定义拷贝构造函数
   int GetX() { return X; }
   int GetY() { return Y; }
   void GetC() { cout << " Object id=" << countP << endl; }

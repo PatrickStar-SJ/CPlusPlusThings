@@ -14,10 +14,12 @@ public:
 
 private:
   static int global;
+  int dd=0;
 };
 int Application::global = 0;
 void Application::f() { global = 5; }
 void Application::g() { cout << global << endl; }
+// void Application::g() { cout << dd<< endl; } // 报错，静态成员函数只能引用属于该类的静态数据成员或静态成员函数。
 
 int main() {
   Application::f();
