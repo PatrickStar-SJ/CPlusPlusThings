@@ -8,6 +8,7 @@ public:
 };
 class B : public A {
 public:
+  // 虚函数
   virtual void f(int i) { cout << "B::f()" << endl; }
 };
 class C : public B {

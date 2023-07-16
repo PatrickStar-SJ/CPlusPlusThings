@@ -4,6 +4,7 @@ using namespace std;
 class B {
 public:
   void f() { g(); }
+  // 虚函数
   virtual void g() { cout << "B::g"; }
 };
 class D : public B {
