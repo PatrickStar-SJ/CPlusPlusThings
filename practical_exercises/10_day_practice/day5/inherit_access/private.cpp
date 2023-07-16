@@ -1,5 +1,9 @@
 #include <iostream>
 using namespace std;
+/*
+派生类不可直接访问基类的私有成员，可通过基类的公有成员函数访问
+*/
+
 class base {
   int x;
 
@@ -17,7 +21,7 @@ public:
   void sety() { y = getx(); }
   void showy() { cout << y << endl; }
 };
-//派生类不可直接访问基类的private成员，可通过基类的共有成员函数访问
+//派生类不可直接访问基类的private成员，可通过基类的公有成员函数访问
 int main() {
   derived obj;
   obj.setx(10);

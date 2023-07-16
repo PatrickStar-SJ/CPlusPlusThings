@@ -31,3 +31,30 @@ int main() {
   
   return 0;
 }
+/*
+
+调用构造函数顺序：
+先调用虚基类的构造函数，再调用非虚基类的构造函数。
+若同一层次中包含多个虚基类,这些虚基类的构造函数按它们的说明的次序调用
+若虚基类由非基类派生而来,则仍然先调用基类构造函数,再调用派生类构造函数
+
+B1   虚->   B  以及   虚->    A
+B2   虚->   B  以及     ->    A
+D     ->   B1和B2
+
+
+
+执行结果：
+Constructing B
+Constructing A
+Constructing B1
+Constructing A        为何下面不在构造B?  看不懂！！！！
+Constructing B2
+Constructing A
+Constructing D
+
+
+
+
+
+*/
