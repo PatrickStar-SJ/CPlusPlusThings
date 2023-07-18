@@ -15,7 +15,7 @@ private:
     return is >> s.sPtr;
   }; //重载输入运算符
 public:
-  String(const char * = "");
+  String(const char * = "");   //申明构造函数，定义在类外。一般情况下，构造函数都放在类外定义，是为了避免重复定义的问题
   const String &operator=(const String &R) {
     length = R.length;
     strcpy(sPtr, R.sPtr);
@@ -28,7 +28,13 @@ public:
   bool operator<(const String &R) const;     //字符串的小于比较 <
   bool operator>(const String &R);           //字符串的大于比较 >
   bool operator>=(const String &R);          //字符串的大于等于比较
-  char &operator[](int);                     //字符串的下标运算
+
+  char &operator[](int);                     //字符串的下标运算   
+                                             /*
+                                             加上 & 的目的是为了实现对元素的引用访问而不是复制。
+                                             因为当你使用 [] 运算符来访问容器类（如数组、向量等）中的元素时，通常希望能够直接修改该元素的值，而不是创建一个副本并对副本进行操作。
+                                             */
+                                             
   ~String(){};
 };
 const String &String::operator+=(const String &R) {
@@ -84,3 +90,27 @@ int main() {
   
   return 0;
 }
+
+
+/*
+在重载 [] 运算符时，加上 & 的目的是为了实现对元素的引用访问而不是复制。
+eg:
+    class MyArray {
+    private:
+        int data[5];
+
+    public:
+        int& operator[](int index) {
+            return data[index];
+        }
+    };
+
+    int main() {
+        MyArray arr;
+        arr[0] = 10; // 修改第一个元素的值
+
+        return 0;
+    }
+
+
+*/

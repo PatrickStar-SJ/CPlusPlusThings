@@ -6,6 +6,7 @@
 若使用using namespace std将std名字空间引入本程序，
 则本程序中的Complex将与std名字空间中的Complex类的运算符重载函数产生冲突，引起编译错误。
 */
+
 /*
 对于不要求左值且可以交换参数次序的运算符（如+、-、*、/ 等运算符），
 最好用非成员形式（包括友元和普通函数）的重载运算符函数实现。
@@ -66,8 +67,11 @@ void Complex::display() {
 int main(void) {
   Complex c1(1, 2), c2(3, 4), c3, c4, c5, c6;
   Complex a, b(2, 3);
-  Complex a1 = b + 2;
-  Complex a2 = 2 + b;
+
+  Complex a1 = b + 2;   //正确，调用的是 operator+(const Complex& a, double b)，
+                        //注意 不等价与  Complex a1(b,2)，但是等价于 Complex a1(b.r + 2, b.i);
+  Complex a2 = 2 + b;   //正确，调用的是 operator+(double a, const Complex& b) 
+
   a1.display();
   a2.display();
   c3 = c1 + c2;

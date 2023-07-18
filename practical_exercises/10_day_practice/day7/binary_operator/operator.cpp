@@ -46,7 +46,7 @@ int main(void) {
   Complex c1(1, 2), c2(3, 4), c3, c4, c5, c6;
   Complex a, b(2, 3);
   a = b + 2; //正确
-  // a=2+b;       			//错误
+  // a=2+b;       			//错误,编译器无法自动将整数转换为 Complex 类型。
   a.display();
   c3 = c1 + c2;
   c4 = c1 - c2;
@@ -61,3 +61,14 @@ int main(void) {
   
   return 0;
 }
+
+/*
+可以添加一个构造函数，该构造函数接受一个整数参数，使其能够处理整数与复数对象之间的相加操作。
+
+类中添加定义：
+Complex(int real) : r(real), i(0) {}; // 新增的构造函数
+
+main函数中：
+a = Complex(2) + b; // 修改为使用复数对象进行相加
+
+*/

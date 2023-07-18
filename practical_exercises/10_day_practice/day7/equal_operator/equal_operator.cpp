@@ -4,9 +4,11 @@
 using namespace std;
 class X {
 public:
-  X &operator=(const X &x) {
+  X &operator=(const X &x) {  //返回类型为X的引用，参数为一个常量引用x，表示函数重载了赋值运算符。
+                              // 如果是 X operator...  返回一个新的X对象，表示赋值后的结果。这种情况下，赋值操作会创建一个新的X对象，并将x的值复制给新对象。
+                              // 如果是 X &operator... 返回当前对象的引用，即*this。这种情况下，赋值操作会创建一个新的X对象，并将x的值复制给新对象。
     cout << "a:";
-    return *this;
+    return *this;   //返回当前对象的引用。
   };
 };
 int main() {
