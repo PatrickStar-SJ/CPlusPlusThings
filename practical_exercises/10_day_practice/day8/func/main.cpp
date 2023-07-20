@@ -1,7 +1,7 @@
 /* 重要.cpp */
 // Eg9-1.cpp
 #include <iostream>
-//注意一点，max与min使用的时候，容易引起冲突，如果写了下面这一行代码，则要改变函数模板名字，否则直接使用std::cout与std::endl
+//注意一点，max与min使用的时候，容易引起冲突，如果写了下面这一行代码，则要改变函数模板名字，否则直接使用std::max与std::min
 using namespace std;
 /*
 不要把这里的class与类的声明关键字class混淆在一起，虽然它们由相同的字母组成，但含义是不同的。
@@ -28,8 +28,7 @@ int main() {
   cout << "2，3.4  的最小值是：" << Min(a, b) << endl;      //隐式调用
   cout << "'a'，'b'	  的最小值是：" << Min('a', 'b') << endl;
   cout << "2.3，3.2的最小值是：" << Min(c, d) << endl;
-  cout << "2.3，3.2的最大值是：" << std::min(c, d)
-       << endl; //引用命名空间内部的最小值函数
+  cout << "2.3，3.2的最大值是：" << std::max(c, d)<< " 2.3，3.2的最小值是: "<<std::min(c,d)<< endl; //引用命名空间内部的最小值函数
   cout << "2.3，3.2的最小值是：" << myMin(c, d) << endl; //更换class为typename
   // cout<<"2，'a'    的最小值是："<<Min(2,'a')<<endl;
   // //报错,不同类型无法处理，请看9-3-1.cpp
