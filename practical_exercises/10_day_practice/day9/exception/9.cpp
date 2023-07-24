@@ -43,3 +43,12 @@ int main() {
     cout << p.Where() << endl;
   }
 }
+/*
+在main()函数中，首先使用throw关键字抛出一个FileSysException异常。
+然后使用try-catch语句捕获异常，按照从上到下的顺序依次匹配catch块，如果匹配到对应的异常类型，则执行相应的代码块。
+
+由于抛出的异常是FileSysException类型，所以会匹配到第一个catch块，输出"FileSysException..."。
+接着又使用throw关键字抛出一个DiskNotFound异常。同样使用try-catch语句捕获异常，按照从上到下的顺序依次匹配catch块。
+由于DiskNotFound是BasicException的子类，所以输出"BasicException..."。
+
+*/
