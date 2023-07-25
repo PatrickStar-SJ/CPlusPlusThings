@@ -30,7 +30,6 @@ public:
     p->salary = 0;
     return p->salary;
   }
-
   void display() {
     for (int i = 0; i < n; i++)
       cout << employ[i].name << "   " << employ[i].salary << endl;
@@ -49,3 +48,14 @@ int main() {
   cout << "-------下为display的输出--------\n\n";
   s.display();
 }
+/*
+在类的构造函数中，将max赋值为传入的参数Max，并初始化n为0。
+然后使用new运算符动态分配了一个大小为max的Person结构数组，并将其地址赋给employ指针。
+
+
+在类中重载了[]运算符，返回引用类型的变量。在重载函数中，首先定义了一个Person类型的指针p，用于遍历数组employ。
+然后通过循环判断数组中是否存在与传入的Name相等的姓名，如果存在，则返回该职工的工资。
+如果不存在，则将新的职工信息添加到数组中，即将其姓名和工资赋值给p，并进行相应的内存动态分配、字符串复制和成员变量赋值。最后返回该职工的工资。
+
+
+*/
