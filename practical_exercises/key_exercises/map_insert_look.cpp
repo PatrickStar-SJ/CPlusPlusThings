@@ -4,6 +4,14 @@
 #include <map>
 using namespace std;
 
+void show_data(map<const char *, const char *> mp){
+    // 使用迭代器遍历map，并打印每个键值对
+    for (auto it = mp.begin(); it != mp.end(); ++it) {
+        std::cout << it->first << " : " << it->second << std::endl;
+    }
+}
+
+
 int main(int argc, char const *argv[]) {
   map<const char *, const char *> mp;
   map<const char *, const char *>::iterator iter;
@@ -16,6 +24,9 @@ int main(int argc, char const *argv[]) {
   }
   // pair<const char*,const char*>插入
   mp.insert(pair<const char *, const char *>(key[2], value[2]));
+
+
+  show_data(mp);
 
   //数组插入方式
   mp["addr"] = "中国";

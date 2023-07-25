@@ -40,3 +40,15 @@ int main() {
   cout << area << endl;
   
 }
+/*
+上面定义的三个类型转换函数 operator xxx 是通过重载类型转换运算符来实现的。
+在C++中，可以通过重载类型转换运算符来定义自定义类型到其他类型的转换规则。
+
+当我们使用Circle对象进行赋值操作时，编译器会自动调用对应的类型转换函数来进行转换。
+
+当我们将Circle对象赋值给int类型的变量r时，编译器会自动调用operator int()函数来将Circle对象转换为int类型，返回圆的半径。
+
+类似地，当我们将Circle对象赋值给double类型的变量length时，编译器会自动调用operator double()函数来将Circle对象转换为double类型，返回圆的周长。
+
+同样地，当我们将Circle对象赋值给float类型的变量area时，编译器会自动调用operator float()函数来将Circle对象转换为float类型，返回圆的面积。
+*/
