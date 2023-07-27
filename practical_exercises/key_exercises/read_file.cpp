@@ -36,7 +36,7 @@ int main(int argc, char const *argv[]) {
   char Name[20], Id[20];
   int Math, Chinese, English;
   fstream ioFile;
-  ioFile.open("d:/per.dat", ios::out | ios::app);
+  ioFile.open("/Users/sunjun/Downloads/per.dat", ios::out | ios::app);
   cout << "---------建立学生档案信息----------\n";
   do {
     cout << "请输入姓名：";
@@ -53,9 +53,10 @@ int main(int argc, char const *argv[]) {
     ioFile.write((char *)&per, sizeof(per));
     cout << "您是否继续建档？(Y/y)  ";
     cin >> ch;
-  } while (ch == 'y' || ch == 'Y');
+
+  } while ((ch == 'y' || ch == 'Y') && ch !='n' && ch != 'N');
   ioFile.close();
-  ioFile.open("d://per.dat", ios::in);
+  ioFile.open("/Users/sunjun/Downloads/per.dat", ios::in);
   Person p;
   ioFile.read((char *)&p, sizeof(p));
   vector<Person> v;

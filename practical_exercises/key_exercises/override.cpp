@@ -65,23 +65,29 @@ private:
 
 int main(int argc, char const *argv[]) {
   cout << "请输入工作周：";
-  int week;
-  cin >> week;
+  int week = 2;
+//   cin >> week;
   Manager m("小王", "11111111", week);
   m.display();
   cout << "请输入销售利润：";
-  int profit;
-  cin >> profit;
+  int profit = 3;
+//   cin >> profit;
   cout << "请输入销售件数：";
-  int x;
-  cin >> x;
+  int x = 4;
+//   cin >> x;
   SaleWorker s("小李", "222222", profit, x);
   s.display();
   cout << "请输入工作小时：";
-  int hour;
-  cin >> hour;
+  int hour = 5;
+//   cin >> hour;
   HourWorker h("小何", "333333", hour);
   h.display();
   
   return 0;
 }
+/*
+定义了一个Manager类，继承自Employee类。Manager类在构造函数中调用了基类的构造函数，传递了名字和ID参数，并根据传入的参数计算了每周的薪水。
+定义了一个SaleWorker类，同样继承自Employee类。SaleWorker类在构造函数中调用了基类的构造函数，传递了名字和ID参数，并根据传入的参数计算了工人的薪水。
+定义了一个HourWorker类，同样继承自Employee类。HourWorker类在构造函数中调用了基类的构造函数，传递了名字和ID参数，并根据传入的参数计算了工人的总工资。
+
+*/

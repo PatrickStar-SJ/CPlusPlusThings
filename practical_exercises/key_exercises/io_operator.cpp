@@ -10,6 +10,8 @@ private:
 
 public:
   Sales(char *Name, char *ID, int Age);
+  //在声明友元函数时，需要指定函数返回类型。在这个例子中，友元函数 operator<< 返回的是一个 Sales 类型的引用（Sales &），
+  //所以在声明时需要指定返回类型为 Sales &。
   friend Sales &operator<<(ostream &os, Sales &s);
   friend Sales &operator>>(istream &is, Sales &s);
 };

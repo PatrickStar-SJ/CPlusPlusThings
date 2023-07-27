@@ -22,10 +22,10 @@ public:
       return false;
   }
   void push(T e);
-  T pop();
+  T pop();    // pop函数申明，返回类型为T。由于栈中可以存储不同类型数据，因此需要使用T来表示类型。
 
 private:
-  T elems[MAXSIZE];
+  T elems[MAXSIZE];   //该栈使用了数组 elems 来存储元素，栈顶指针 top 指向栈顶元素的位置。
   int top;
 };
 
