@@ -49,6 +49,21 @@ int main() {
 
     auto i = 42;  // 编译器具备实参推导
 
+
+    /*
+    这段代码是关于使用lambda表达式创建匿名函数的示例。
+
+    auto ll1 = [](int x) -> int { return x + 10; }; 
+    表示创建了一个lambda表达式，并将其赋值给了ll1变量。这个lambda表达式接受一个整数参数x，并返回x加上10的结果。
+
+    接下来，function<int(int x)> ll = [](int x) -> int { return x + 10; }; 
+    表示创建了一个函数对象ll，这个对象的类型是function<int(int x)>，也就是一个接受一个整数参数并返回整数的函数。
+    这个函数对象使用lambda表达式来定义，与上面的ll1相同，接受一个整数参数x，并返回x加上10的结果。
+
+    这段代码展示了lambda表达式的两种使用方式:
+    一种是直接使用auto关键字推导类型，
+    另一种是使用function模板类指定函数对象类型。
+    */
     auto ll1 = [](int x) -> int {
         return x + 10;
     };

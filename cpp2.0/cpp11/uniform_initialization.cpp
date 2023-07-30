@@ -12,3 +12,7 @@ int main() {
     vector<int> v{2, 3, 5};
     return 0;
 }
+/*
+这段代码使用初始化列表(initializer_list)来初始化数组和向量。
+初始化列表关联一个数组(array)对象并将其逐一分解传递给函数。
+*/
