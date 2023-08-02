@@ -24,3 +24,4 @@ class Derivered : public Base
 int main()
 {
 }
+//在Derivered类中，使用override关键字重写了Base类的虚函数func，但是在重写时添加了一个额外的参数int，导致编译错误。

@@ -16,7 +16,7 @@ using namespace std;
 // 2.在使用vector deque等容器的移动构造和移动赋值的时候，如果移动构造和移动赋值没有加上noexcept，
 // 则容器增长的时候不会调用move constructor，效率就会偏低，所以后面需要加上noexcept，安心使用。
 
-void foo() noexcept(true) {
+void foo() noexcept(true) {   
 }
 
 int main() {
@@ -24,3 +24,4 @@ int main() {
     vector<int> vec;
     return 0;
 }
+//函数定义中的noexcept(true)表示该函数不会抛出异常。也就是说，如果在foo()函数内部发生异常，它将不会引发异常，而是将异常处理控制权传递给上层调用者。

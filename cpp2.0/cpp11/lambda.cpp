@@ -9,6 +9,8 @@
 #include <functional>
 
 using namespace std;
+//lambda表达式的语法形式为[捕获列表](参数列表) -> 返回类型 { 函数体 }。
+
 
 // [introducer](optional)mutable throwSpec->retType {}
 // mutable决定[]能够被改写  mutable throwSpec retType都是选择的,只要有一个存在就得写()
@@ -47,6 +49,17 @@ private:
     int m_b;
 };
 
+/*
+X 类：这是一个表示某种对象的类。它具有两个私有成员变量 __x 和 __y，通过构造函数进行初始化。
+类中定义了一个重载的调用运算符 operator()，它接受一个整数参数 a，并返回该参数。类中还定义了两个成员函数 f() 和 ff()。
+
+f() 函数中包含一个 lambda 表达式。该表达式使用捕获列表 [&]，表示它可以访问当前对象的所有成员变量和方法。
+lambda 表达式返回调用 operator() 的结果，参数是 __x 和 __y 相加的值。
+
+ff() 函数中包含一个 lambda 表达式。该表达式使用捕获列表 [this]，表示它只能访问当前对象的成员变量和方法。
+lambda 表达式返回 __x 成员变量的值。
+*/
+
 class X {
 private:
     int __x, __y;
@@ -77,11 +90,27 @@ int main() {
     [] {
         cout << "hello" << endl;
     }();
+    /*
+    这是一个立即调用的lambda函数。[]表示此lambda函数没有捕获任何外部变量，{}内包含要执行的代码，
+    这里是输出字符串"hello"并换行。()表示立即调用这个lambda函数，使其在定义后立即执行。
+    因此，运行此代码会输出"hello"。
+    */
+
+    //=================================================================
+
 
     auto I = [] {
         cout << "hello" << endl;
     };
     I();
+    /*
+    这里首先将一个lambda函数赋值给了一个名为I的变量。[]表示此lambda函数同样没有捕获任何外部变量，
+    {}内是要执行的代码，同样是输出字符串"hello"并换行。
+    最后通过I()调用这个lambda函数。这段代码的结果也是输出"hello"。
+    */
+
+    //=================================================================
+
     int id = 0;
     // 先看前面的id 如果没有mutable error: increment of read-only variable ‘id’
     auto f = [id]()mutable {
@@ -93,6 +122,11 @@ int main() {
     f();    // 1
     f();    // 2
     cout << id << endl;
+    /*
+    创建了一个Lambda表达式，并使用了可变捕获（mutable capture）。
+    连续调用Lambda表达式通过函数调用运算符来执行。每次调用时，都会打印当前id的值并将其递增。
+    由于Lambda表达式中的id是通过值捕获的，而不是引用捕获，所以主函数中的id值没有受到Lambda表达式中的递增操作的影响，因此输出的是42。
+    */
 
     // 上述lambda就相当于
 //    class Functor {
@@ -106,6 +140,9 @@ int main() {
 //    };
 //    Functor f;
 
+
+    //=================================================================
+
     int id1 = 0;
     // 加不加mutable没影响,且传引用只要后面id1被修改了,就会使用修改后的值进行操作
     auto f1 = [&id1]() {
@@ -117,6 +154,13 @@ int main() {
     f1();    // 43
     f1();    // 44
     cout << id1 << endl;
+    /*
+    lambda表达式创建了一个可调用对象f1，并且通过传引用的方式捕获了id1变量。
+    [&id1]表示以引用的方式捕获外部变量id1。这意味着在lambda表达式中可以访问并修改id1变量的值。
+    在lambda表达式中对id1的修改也影响了外部的id1变量。
+    */
+
+    //=================================================================
 
 
     // 传参与返回
@@ -132,6 +176,11 @@ int main() {
     int param = 1;
     f2(param);
     cout << "param=" << param << endl;
+    /*
+    lambda表达式内部使用了捕获列表[&id2]，表示通过引用方式捕获外部变量id2。
+    调用函数对象f2，将param作为参数传递给f2。
+    */
+    //=================================================================
 
     // [=] =表示默认以by value传递外部所有变量
     // [&] &表示默认以by reference传递外部所有变量
@@ -142,7 +191,7 @@ int main() {
         cout << "param=" << param << endl;
     };
     f3();
-
+    //=================================================================
     // 一部分传引用,其余传值
     cout << "id=" << id << endl;
     auto f4 = [=, &id]() {       // =不可以放在&id后面
@@ -153,7 +202,7 @@ int main() {
         cout << "param=" << param << endl;
     };
     f4();
-
+    //=================================================================
     // 一部分传值,其余传引用
     cout << "id=" << id << endl;
     auto f5 = [&, id]() {       // &不可以放在id后面
@@ -168,7 +217,7 @@ int main() {
     cout << "x_.f()=" << x_.f() << endl;   // 1+2=3
     cout << "x_.ff()=" << x_.ff() << endl; // 1
 
-
+    //=================================================================
 
     // 下面lambda函数等价于上述的UnNamedLocalFunction
     int tobefound = 5;
@@ -180,24 +229,43 @@ int main() {
     bool b2 = lambda2(5);
     cout << b1 << " " << b2 << endl;
 
+
+
     auto ll1 = [](int x) -> int {
         return x + 10;
     };
+    //lambda表达式的语法形式为[捕获列表](参数列表) -> 返回类型 { 函数体 }。
+    //在这里，捕获列表为空，参数列表中有一个整数参数x，返回类型为int，函数体为return x + 10;。
+    //这个lambda表达式的功能很简单，它将输入的整数参数x加上10，并将结果作为整数返回。
+    //可以将ll1作为函数对象调用，传入一个整数参数来执行它的逻辑，并得到相应的返回值。
+
+
     // lambda 匿名函数
     function<int(int x)> ll = [](int x) -> float {
         return x + 10.0;
     };
     cout<<ll(1)<<endl;
+    /*
+    声明了一个名为 ll 的变量，类型为 function<int(int x)>。
+    这意味着 ll 可以存储一个可调用对象（例如函数或 lambda），该对象接受一个 int 参数并返回一个 int 值。
+    */
+
+
+
 
     // decltype+lambda
     // 比大小
+    //声明了一个类型为function<bool(const Person&p1,const Person&p2)>的变量cmp，
+    //它表示一个可以接受两个Person对象作为参数并返回布尔值的函数。这个函数用于比较两个Person对象的顺序。
     function<bool(const Person&p1,const Person&p2)> cmp = [](const Person &p1, const Person &p2) {
         return p1.lastname < p2.lastname;
     };
+    //Lambda 表达式 [](const Person &p1, const Person &p2) { return p1.lastname < p2.lastname; } 定义了一个匿名函数，
+    //用于比较两个 Person 对象的姓氏（lastname）。Lambda 表达式使用方括号 [] 表示捕获列表
 
 
     // 对于lambda,我们往往只有object,很少有人能够写出它的类型，而有时就需要知道它的类型,要获得其type,就要借助其decltype
-    set<Person, decltype(cmp)> col(cmp);
+    set<Person, decltype(cmp)> col(cmp); //这将使用上面定义的比较函数cmp来确定集合中元素的顺序。
 
     // 要申明lambda对象的类型，可以使用template或者auto进行自动推导。
     // 如果需要知道类型，可以使用decltype，比如，让lambda函数作为关联容器或者无序容器的排序函数或者哈希函数。
